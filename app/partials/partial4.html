@@ -1,0 +1,11 @@
+<div class="container" data-ng-init="names=['Jeff', 'Tom', 'Alex']">
+    Email: <input type="text" data-ng-model="newUser.email" />
+    <br/>
+    Password: <input type="text" data-ng-model="newUser.password">
+    <br/>
+    <button data-ng-click="addUser()">Login</button>
+    <br/>
+    <ul>
+        <li ng-repeat="user in users">{{ user.email + ' ' + user.password }}</li>
+    </ul>
+</div>
