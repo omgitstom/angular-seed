@@ -24,7 +24,7 @@
     <![endif]-->
       <!--<script language="JavaScript" type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>-->
     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-
+    <script type="text/javascript" src="/js/bootstrapValidator.js"></script>
 <html>
   <body>
     <div class="container">
@@ -103,6 +103,40 @@
 
         $(document).ready(function(){
             $('form[name=signup]').submit(register);
+
+            $('form[name=signup]').bootstrapValidator({
+                message: 'This value is not valid',
+                fields: {
+                    email: {
+                        validators: {
+                            emailAddress: {
+                                message: 'The input is not a valid email address'
+                            }
+                        }
+                    },
+                    'first-name':{
+                        validators: {
+                            notEmpty:{
+                                message: 'First name can\'t be empty'
+                            }
+                        }
+                    },
+                    'last-name':{
+                        validators: {
+                            notEmpty:{
+                                message: 'Last name can\'t be empty'
+                            }
+                        }
+                    },
+                    org:{
+                        validators: {
+                            notEmpty:{
+                                message: 'Company name can\'t be empty'
+                            }
+                        }
+                    }
+                }
+            });
         });
 
     </script>
