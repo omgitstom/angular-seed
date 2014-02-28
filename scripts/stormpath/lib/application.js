@@ -12,7 +12,7 @@ Application.prototype.login = function login(username, password, callback){
 	var _this = this;
 	console.log(username, password);
 	var base64uidpassword = new Buffer(username+":"+password).toString('base64');
-	this.dataStore.createResource(_this.loginAttempts.href, {
+	this.dataStore.createResource(_this.loginAttempts.href+"?expand=account", {
 		type: 'basic',
 		value: base64uidpassword
 	}, callback);

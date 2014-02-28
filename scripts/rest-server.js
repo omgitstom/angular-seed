@@ -15,19 +15,26 @@ client.getCurrentTenant(function (err, tenant) {
  	if (err) throw err;
 
  	server = restify.createServer();
+ 	server.use(restify.bodyParser());
 
  	var handleRequest = function (req, res, next){
- 		href = tenant.href + "/applications/"+ appId;
 		tenant.dataStore.getResource("https://api.stormpath.com/v1/applications/5jaB29lf9fanIBTywhEIne", null, Application, function(err, obj){
-			if (err) throw err;
-			obj.login("tom@abbott.com", "TomAbbott1", function (err, obj){
-				console.log(err, obj);
+			if (err || !req.params.email || !req.params.password) throw err;
+			obj.login(req.params.email, req.params.password, function (err, obj){
+				res.send(200, obj.account);
+
 			});
 		});
 	};
 
- 	server.get('/login/', handleRequest);
+	var handleSignup = function (req, res, next){
+		
+	};
+ 	server.post('/login/', handleRequest);
 
+ 	server.post('/signup/', handleSignup);
+
+ 	//Static files
  	server.get(/.*/, restify.serveStatic({
   		directory: './app/',
   		default: 'index.html'
@@ -36,10 +43,10 @@ client.getCurrentTenant(function (err, tenant) {
   		directory: './bower_components/',
   		default: 'index.html'
 	}));
+
  	server.listen(8080, function() { 
   		console.log('%s listening at %s', server.name, server.url);
 	});
-
 });
 
 
