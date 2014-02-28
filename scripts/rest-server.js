@@ -18,42 +18,58 @@ client.getCurrentTenant(function (err, tenant) {
  	server.use(restify.bodyParser());
 
  	var handleRequest = function (req, res, next){
-		tenant.dataStore.getResource("https://api.stormpath.com/v1/applications/5jaB29lf9fanIBTywhEIne", null, Application, function(err, obj){
-			if (err || !req.params.email || !req.params.password) throw err;
+		tenant.dataStore.getResource("https://api.stormpath.com/v1/applications/" + appId, null, Application, function(err, obj){
+			if (err || !req.params.email || !req.params.password) {
+				res.send(400, err)
+			}
 			obj.login(req.params.email, req.params.password, function (err, obj){
-				res.send(200, obj.account);
-
+				if(err){
+					res.send(400, err);
+				}else{
+					res.send(200, obj.account);
+				}
 			});
 		});
 	};
 
 	var handleSignup = function (req, res, next){
-		client.createResource("https://api.stormpath.com/v1/applications/5jaB29lf9fanIBTywhEIne/accounts",
-								null,
-								{
-									email:req.params.email,
-									givenName:req.params['first-name'],
-									surname:req.params['last-name'],
-									password:req.params.password,
-									customData:{
-										companyName:req.params.org,
-										tos: req.params.tos
-									}
-								},
-								function(err, account){
-									res.send(200, account);
-								}
-							);
+		client.createResource(
+			"https://api.stormpath.com/v1/applications/"+appId+"/accounts",
+			null,
+			{
+				email:req.params.email,
+				givenName:req.params['first-name'],
+				surname:req.params['last-name'],
+				password:req.params.password,
+				customData:{
+					companyName:req.params.org,
+					tos: req.params.tos
+				}
+			},
+			function(err, account){
+				res.send(200, account);
+			}
+		);
 	};
 
-	var handlePasswordReset = function (req, res, next){
+	var handleSendPasswordReset = function (req, res, next){
+		tenant.dataStore.getResource("https://api.stormpath.com/v1/applications/"+ appId, null, Application, function(err, obj){
+			if (err) throw err;
+			obj.resetPassword(req.params.email, function (err, obj){
+				res.send(200, obj);
+			});
+		});
+	};
+
+	var handleResetPassword = function (req, res, next){
 		
 	};
 
+	//Routes to handlers
  	server.post('/login/', handleRequest);
-
  	server.post('/signup/', handleSignup);
- 	server.post('/resetPassword/', handlePasswordReset)
+ 	server.post('/resetPassword/', handleSendPasswordReset);
+ 	server.post('/passwordReset/', handleResetPassword);
 
  	//Static files
  	server.get(/.*/, restify.serveStatic({
