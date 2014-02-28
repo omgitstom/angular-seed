@@ -38,21 +38,21 @@
 		  <!-- All the alert messages this page needs -->
 		  <!-- Alert: Account created -->
 		  <div class="alert alert-success fade in" id="account-created">
-		        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		        <button name="success" type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		        <strong>Win! </strong>
 		        Your account has been successfully created.
 		  </div> <!-- alert account-created -->
 		  
 		  <!-- Alert: Verification Needed -->
 		  <div class="alert alert-warning fade in" id="verification-needed">
-		        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		        <button name="warning" type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		        <strong>Almost there! </strong>
 		        Check your email your email for a verification email.
 		  </div> <!-- alert verification needed -->
 		  
 		  <!-- Alert: Login Failure -->
 		  <div class="alert alert-danger fade in" id="login-fail">
-		        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		        <button name="danger" type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		        <strong>Try again. </strong>
 		        Incorrect email and password.
 		  </div> <!-- alert login fail -->
@@ -98,12 +98,12 @@
                 dataType:"json",
                 data:"{\"email\":\"" + email + "\", \"password\":\"" + password + "\"}",
                 success: function(data, textStatus, jqXHR) {
+                    $('.alert-success').show();
                     console.log("smut worked.  Here is the data: " + data)
-                    alert(data);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
+                    $('.alert-danger').show();
                     console.log("Smut FAILED!!!  YOU ARE A FAILURE!!! ")
-                    alert("error");
                 }
             });
             return false;
@@ -111,6 +111,20 @@
 
         $(document).ready(function() {
             $('form[name=login-form]').submit(login);
+
+            $('button[name=success]').click( function() {
+                $('.alert-success').hide();
+            });
+
+            $('button[name=warning]').click( function() {
+                $('.alert-warning').hide();
+            });
+
+            $('button[name=danger]').click( function() {
+                $('.alert-danger').hide();
+            });
+
+            $('.alert').hide();
 
             $('#login-form').bootstrapValidator({
                 message: 'This value is not valid',
