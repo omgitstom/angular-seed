@@ -4,9 +4,7 @@ body {
   background-color: #eee;
 }
 
-.form-box, .form-register, 
-.form-reset-request, 
-.form-password-reset {
+.form-box {
   max-width: 400px;
   padding: 15px;
   margin: 0 auto;
@@ -17,7 +15,7 @@ body {
 	
 }*/
 
-.form-box .form-login-heading,
+.form-box h2,
 .form-box .checkbox {
   margin-bottom: 10px;
 }
