@@ -28,11 +28,32 @@ client.getCurrentTenant(function (err, tenant) {
 	};
 
 	var handleSignup = function (req, res, next){
+		client.createResource("https://api.stormpath.com/v1/applications/5jaB29lf9fanIBTywhEIne/accounts",
+								null,
+								{
+									email:req.params.email,
+									givenName:req.params['first-name'],
+									surname:req.params['last-name'],
+									password:req.params.password,
+									customData:{
+										companyName:req.params.org,
+										tos: req.params.tos
+									}
+								},
+								function(err, account){
+									res.send(200, account);
+								}
+							);
+	};
+
+	var handlePasswordReset = function (req, res, next){
 		
 	};
+
  	server.post('/login/', handleRequest);
 
  	server.post('/signup/', handleSignup);
+ 	server.post('/resetPassword/', handlePasswordReset)
 
  	//Static files
  	server.get(/.*/, restify.serveStatic({
