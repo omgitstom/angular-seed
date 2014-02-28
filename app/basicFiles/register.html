@@ -71,7 +71,8 @@
     </div><!--end form-box -->
   </div>
     <script type="text/javascript">
-        function register() {
+        function register(e) {
+            e.preventDefault();
             var targetUrl = "/signup";
             var firstName = $("#inputFirstName").value;
             var lastName = $("#inputLastName").value;
