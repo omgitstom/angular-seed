@@ -13,7 +13,7 @@
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/app/css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -24,7 +24,11 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-  <body>
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrapValidator.js"></script>
+
+
+<body>
 
     <div class="container">
 	  <div class="form-box" id="login">
@@ -56,11 +60,11 @@
 		  <!-- end of Alerts section -->
 		  
 		  <div class="login-form">
-			  <form role="form" action="/login" method="post">
+			  <form role="form" id="login-form" name="login-form" action="/login" method="post">
 				  <input name="email" type="email" class="form-control" placeholder="Email address" required="" autofocus="">
 				  <input name="password" type="password" class="form-control" placeholder="Password" required="">
 				  <label class="checkbox">
-					  <input type="checkbox" value="remember-me"> Keep me logged in
+					  <input type="checkbox" name="remember-me" value="remember-me"> Keep me logged in
 				  </label>
 				  <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
 				  <div id="login-alt">
@@ -68,15 +72,63 @@
 					  <br>
 					  <span>No account? <a href="register.html">Register here</a></span>
 				  </div>
-			  </div>
-		  </form>
-	  </div> 
+		      </form>
+	      </div>
+	  </div>
   </div><!-- /container -->
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-  
+    <script type="text/javascript">
+        function login(e) {
+            e.preventDefault();
 
-</body></html>
+            var targetUrl = "/login";
+            var email = $('input[name=email]').val();
+            var password = $('input[name=password]').val();
+            var rememberMe = $("input[name=remember-me]").val();
+            $.ajax({
+                type: 'POST',
+                url: targetUrl,
+                contentType:'application/json; charset=utf-8',
+                dataType:"json",
+                data:"{\"email\":\"" + email + "\", \"password\":\"" + password + "\"}",
+                success: function(data, textStatus, jqXHR) {
+                    console.log("smut worked.  Here is the data: " + data)
+                    alert(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Smut FAILED!!!  YOU ARE A FAILURE!!! ")
+                    alert("error");
+                }
+            });
+            return false;
+        }
+
+        $(document).ready(function() {
+            $('form[name=login-form]').submit(login)
+            $('form[name=login-form]').bootstrapValidator({
+                message: 'This value is not valid',
+                fields: {
+                    email: {
+                        validators: {
+                            emailAddress: {
+                                message: 'The input is not a valid email address'
+                            }
+                        }
+                    },
+                    password:{
+                        validators: {
+                            notEmpty:{
+                                message: 'First name can\'t be empty'
+                            }
+                        }
+                    }
+                }
+            });
+        })
+    </script>
+
+
+
+</body>
+</html>
