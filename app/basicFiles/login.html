@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0040)http://getbootstrap.com/examples/signin/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +7,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="http://getbootstrap.com/assets/ico/favicon.ico">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Login Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -28,25 +27,27 @@
   <body>
 
     <div class="container">
-		
-      	<form class="form-signin" role="form" action="/login" method="post">
-			<h2 class="form-signin-heading">Please sign in</h2>
-        	<input name="email" type="email" class="form-control" placeholder="Email address" required="" autofocus="">
-        	<input name="password" type="password" class="form-control" placeholder="Password" required="">
-        	<label class="checkbox">
-				<input type="checkbox" value="remember-me"> Keep me signed in
-        	</label>
-        	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-			<div id="signin-alt">
-				<span><a href="forgot-password.html">Forgot password?</a></span>
-				<br>
-				<span>No account? <a href="register.html">Register here</a></span>
-				</div>
-			</div>
-      	</form>
-		
-
-    </div> <!-- /container -->
+	  <div class="form-box" id="login">
+		  <div class="form-header">
+			  <h2 class="form-login-heading">Log in</h2>
+		  </div>
+		  <div class="login-form">
+			  <form role="form" action="/login" method="post">
+				  <input name="email" type="email" class="form-control" placeholder="Email address" required="" autofocus="">
+				  <input name="password" type="password" class="form-control" placeholder="Password" required="">
+				  <label class="checkbox">
+					  <input type="checkbox" value="remember-me"> Keep me logged in
+				  </label>
+				  <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+				  <div id="login-alt">
+					  <span><a href="forgot-password.html">Forgot password?</a></span>
+					  <br>
+					  <span>No account? <a href="register.html">Register here</a></span>
+				  </div>
+			  </div>
+		  </form>
+	  </div> 
+  </div><!-- /container -->
 
 
     <!-- Bootstrap core JavaScript
