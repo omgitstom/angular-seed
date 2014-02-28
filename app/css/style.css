@@ -7,7 +7,7 @@ body {
 .form-box, .form-register, 
 .form-reset-request, 
 .form-password-reset {
-  max-width: 330px;
+  max-width: 400px;
   padding: 15px;
   margin: 0 auto;
 }
@@ -59,6 +59,11 @@ body {
 	text-align: center;
 }
 
-
+h1.form-register-heading {
+  text-align: center;
+}
+p.register-sub-heading {
+  text-align: center;
+}
 
 
