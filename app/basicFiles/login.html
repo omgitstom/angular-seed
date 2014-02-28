@@ -31,6 +31,29 @@
 		  <div class="form-header">
 			  <h2 class="form-login-heading">Log in</h2>
 		  </div>
+		  <!-- All the alert messages this page needs -->
+		  <!-- Alert: Account created -->
+		  <div class="alert alert-success fade in" id="account-created">
+		        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		        <strong>Win! </strong>
+		        Your account has been successfully created.
+		  </div> <!-- alert account-created -->
+		  
+		  <!-- Alert: Verification Needed -->
+		  <div class="alert alert-warning fade in" id="verification-needed">
+		        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		        <strong>Almost there! </strong>
+		        Check your email your email for a verification email.
+		  </div> <!-- alert verification needed -->
+		  
+		  <!-- Alert: Login Failure -->
+		  <div class="alert alert-danger fade in" id="login-fail">
+		        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		        <strong>Try again. </strong>
+		        Incorrect email and password.
+		  </div> <!-- alert login fail -->
+		  
+		  <!-- end of Alers section -->
 		  <div class="login-form">
 			  <form role="form" action="/login" method="post">
 				  <input name="email" type="email" class="form-control" placeholder="Email address" required="" autofocus="">
