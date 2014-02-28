@@ -12,7 +12,7 @@
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/app/css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -22,6 +22,8 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+      <!--<script language="JavaScript" type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>-->
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 
 <html>
   <body>
@@ -32,7 +34,7 @@
   			  <h2 class="form-register-heading">Creat an Account</h2>
   		  </div>
 		  <div class="register-form">
-			  <form role="form" action="/signup" method="POST">
+			  <form role="form" name="signup" action="/signup" method="POST">
 		  		<p class="lead register-sub-heading">Value prop on why your application rocks</p>
 		  	  <div class="form-group">
 		    	  <label for="inputFirstName">First Name</label>
@@ -68,6 +70,42 @@
 		</div><!--end register-form -->
     </div><!--end form-box -->
   </div>
+    <script type="text/javascript">
+
+        function register(e) {
+
+            e.preventDefault();
+
+            var targetUrl = "/signup";
+            var firstName = $("#inputFirstName").val();
+            var lastName = $("#inputLastName").val();
+            var email = $("#inputEmail").val();
+            var org = $("#inputOrg").val();
+            var password = $("#inputPassword").val();
+            var tos = $("#inputTos").val();
+            $.ajax({
+                type: 'POST',
+                url: targetUrl,
+                contentType:'application/json; charset=utf-8',
+                dataType:"json",
+                data:"{\"first-name\":\"" + firstName + "\", \"last-name\":\"" + lastName + "\", \"email\":\"" + email + "\", \"org\":\"" + org + "\", \"password\":\"" + password + "\", \"tos\":\"" + tos + "\"}",
+                success: function(data, textStatus, jqXHR) {
+                    console.log("smut worked.  Here is the data: " + data)
+                    alert(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Smut FAILED!!!  YOU ARE A FAILURE!!! ")
+                    alert("error");
+                }
+            });
+            return false;
+        }
+
+        $(document).ready(function(){
+            $('form[name=signup]').submit(register);
+        });
+        
+    </script>
   </body>
 </html>
 
