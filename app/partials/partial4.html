@@ -1,13 +1,13 @@
-<div class="form-signin" data-ng-init="names=['Jeff', 'Tom', 'Alex']">
+<form class="form-signin" action="/login">
     <h2 class="form-signin-heading">Please sign in</h2>
     <input class="form-control" type="text" placeholder="you@gmail.com" data-ng-model="username" />
     <input class="form-control" type="password" placeholder="password" data-ng-model="password">
     <label class="checkbox">
         <input type="checkbox" value="remember-me"> Remember me
     </label>
-    <button class="btn btn-lg btn-primary btn-block" data-ng-click="addUser()">Login</button>
+    <button class="btn btn-lg btn-primary btn-block" data-ng-click="login()">Login</button>
     <br/>
     <ul>
         <li ng-repeat="user in users">{{ user.email + ' ' + user.password }}</li>
     </ul>
-</div>
+</form>

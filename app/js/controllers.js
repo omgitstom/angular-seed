@@ -37,11 +37,14 @@ myApp.controller('LoginCtrl', function($scope, $rootScope, $location, SessionSer
     $scope.user = {username: '', password: ''};
 
     $scope.login = function() {
+        alert("HERE")
         $scope.user = SessionService.save($scope.user, function(success) {
             $rootScope.loggedIn = true;
-            $location.path('/');
+            $location.path('/login');
+            alert("GOT HERE!!!")
         }, function(error) {
             $scope.loginError = true;
+            alert("ERROR was received.")
         });
     };
 });
