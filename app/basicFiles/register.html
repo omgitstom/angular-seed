@@ -54,7 +54,7 @@
 		  	<div class="form-group">
 		    	
 		    	<input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
-                <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+                <input type="password" name="confirmPassword" class="form-control"  placeholder="Confirm Password">
 		  	</div>
 		  	<div class="checkbox">
 		    	<label>
@@ -132,6 +132,36 @@
                         validators: {
                             notEmpty:{
                                 message: 'Company name can\'t be empty'
+                            }
+                        }
+                    },
+                    password: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The password is required and can\'t be empty'
+                            },
+                            identical: {
+                                field: 'confirmPassword',
+                                message: 'The password and its confirmation are not the same'
+                            },
+                            different: {
+                                field: 'email',
+                                message: 'The password can\'t be the same as email'
+                            }
+                        }
+                    },
+                    confirmPassword: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The confirm password is required and can\'t be empty'
+                            },
+                            identical: {
+                                field: 'password',
+                                message: 'The password and its confirm are not the same'
+                            },
+                            different: {
+                                field: 'email',
+                                message: 'The password can\'t be the same as username'
                             }
                         }
                     }
