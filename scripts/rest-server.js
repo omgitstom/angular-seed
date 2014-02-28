@@ -56,13 +56,36 @@ client.getCurrentTenant(function (err, tenant) {
 		tenant.dataStore.getResource("https://api.stormpath.com/v1/applications/"+ appId, null, Application, function(err, obj){
 			if (err) throw err;
 			obj.resetPassword(req.params.email, function (err, obj){
-				res.send(200, obj);
+				if (!err){
+					res.send(200, obj);
+				}else{
+					res.send(404, err);
+				}
+				
 			});
 		});
 	};
 
 	var handleResetPassword = function (req, res, next){
-		
+		tenant.dataStore.getResource("https://api.stormpath.com/v1/applications/"+ appId, null, Application, function(err, obj){
+
+			obj.passwordReset(req.params.sptoken, function(err, temp){
+				if (!err){
+					tenant.dataStore.getResource(temp.account.href, function(err, account){
+						account.password = req.params.password;
+						account.save(function (err, savedAccount){
+							if(!err){
+								res.send(200, savedAccount);
+							}else{
+								res.send(err.code, err);
+							}
+						});
+					});
+				}else{
+					res.send(err.code, err);
+				}
+			});
+		});
 	};
 
 	//Routes to handlers

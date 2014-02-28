@@ -98,12 +98,12 @@
                 dataType:"json",
                 data:"{\"email\":\"" + email + "\", \"password\":\"" + password + "\"}",
                 success: function(data, textStatus, jqXHR) {
+                    $('.alert').hide();
                     $('.alert-success').show();
-                    console.log("smut worked.  Here is the data: " + data)
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
+                    $('.alert').hide();
                     $('.alert-danger').show();
-                    console.log("Smut FAILED!!!  YOU ARE A FAILURE!!! ")
                 }
             });
             return false;

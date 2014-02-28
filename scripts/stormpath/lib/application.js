@@ -29,7 +29,7 @@ Application.prototype.resetPassword = function resetPassword(email, callback){
 Application.prototype.passwordReset = function passwordReset(token, callback){
 	var _this=this;
 
-	this.dataStore.getResource(_this.passwordResetTokens.href+"/"+token,{},callback);
+	this.dataStore.getResource(_this.passwordResetTokens.href+"/"+token, callback);
 }
 
 module.exports = Application;

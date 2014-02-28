@@ -56,6 +56,8 @@
 		  	<div class="form-group">
 		    	
 		    	<input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+            </div>
+            <div class="form-group">    
                 <input type="password" name="confirmPassword" class="form-control"  placeholder="Confirm Password">
 		  	</div>
 		  	<div class="checkbox">
@@ -98,7 +100,6 @@
                     
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    console.log("Smut FAILED!!!  YOU ARE A FAILURE!!! ")
                     alert("error");
                 }
             });
@@ -109,6 +110,7 @@
             $('#success-box').hide();
 
             $('form[name=signup]').submit(register);
+            $('button[type=submit]').attr('disabled', 'disabled');
 
             //Validation
             $('form[name=signup]').bootstrapValidator({
@@ -144,16 +146,17 @@
                     },
                     password: {
                         validators: {
-                            notEmpty: {
-                                message: 'The password is required and can\'t be empty'
-                            },
-                            identical: {
-                                field: 'confirmPassword',
-                                message: 'The password and its confirmation are not the same'
-                            },
+                            stringLength:{
+                                min: 8,
+                                max: 100,
+                                message: "Password length must be greater than 7 "
+                            },    
                             different: {
                                 field: 'email',
                                 message: 'The password can\'t be the same as email'
+                            },regexp: {
+                                message: "Password does not meet complexity requirements (Upper and lower case AND number)",
+                                regexp: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/
                             }
                         }
                     },
@@ -165,10 +168,6 @@
                             identical: {
                                 field: 'password',
                                 message: 'The password and its confirm are not the same'
-                            },
-                            different: {
-                                field: 'email',
-                                message: 'The password can\'t be the same as username'
                             }
                         }
                     }
