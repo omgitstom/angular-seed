@@ -28,7 +28,9 @@
 <html>
   <body>
     <div class="container">
-
+          <div id="success-box" class="form-box">
+            <h3>Account Created! Now you can <a href="login.html"> sign in </a></h3>
+          </div>
   	  <div class="form-box" id="register">
   		  <div class="form-header">
   			  <h1 class="form-register-heading">Create an Account</h1>
@@ -90,8 +92,10 @@
                 dataType:"json",
                 data:"{\"first-name\":\"" + firstName + "\", \"last-name\":\"" + lastName + "\", \"email\":\"" + email + "\", \"org\":\"" + org + "\", \"password\":\"" + password + "\", \"tos\":\"" + tos + "\"}",
                 success: function(data, textStatus, jqXHR) {
-                    console.log("smut worked.  Here is the data: " + data)
-                    alert(data);
+                    $('#register').fadeOut('slow', function(){
+                        $('#success-box').fadeIn('slow');
+                    });
+                    
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log("Smut FAILED!!!  YOU ARE A FAILURE!!! ")
@@ -102,8 +106,11 @@
         }
 
         $(document).ready(function(){
+            $('#success-box').hide();
+
             $('form[name=signup]').submit(register);
 
+            //Validation
             $('form[name=signup]').bootstrapValidator({
                 message: 'This value is not valid',
                 fields: {
