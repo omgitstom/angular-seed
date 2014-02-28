@@ -4,7 +4,10 @@ body {
   background-color: #eee;
 }
 
-.form-signin {
+/* Sign in Form */
+.form-signin, .form-register, 
+.form-reset-request, 
+.form-password-reset {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
@@ -38,3 +41,16 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+/* Register */
+.register-sub-heading {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#signin-alt, #register-alt{
+	margin-top: 10px;
+	margin-left: 10px;
+	text-align: center;
+}
+
+

@@ -26,8 +26,9 @@
 <html>
   <body>
     <div class="container">
-		
-		<form role="form" action="/signup">
+		<form class="form-register" role="form" action="/signup">
+		  <h2 class="form-signin-heading">Create an Account</h2>
+		  <div class="register-sub-heading">Value prop on why your application rocks</div>
 		  <div class="form-group">
 		    <label for="inputFirstName">First Name</label>
 		    <input type="text" name="first-name" class="form-control" id="inputFirstName" placeholder="First Name">
@@ -50,10 +51,15 @@
 		  </div>
 		  <div class="checkbox">
 		    <label>
-		      <input type="checkbox" name="tos"><a href="#">I agree to the Terms of Service</a>
+		      <input type="checkbox" name="tos">I agree to the <a href="#">Terms of Service</a>.
 		    </label>
 		  </div>
 		  <button type="submit" class="btn btn-default">Submit</button>
+		  <div id="register-alt">
+			  Already have an account? 
+			  <a href="login.html"> Sign in </a>
+		  </div>
+		
 		</form>
     </div>
   </body>
