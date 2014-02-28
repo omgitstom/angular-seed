@@ -35,6 +35,7 @@ body {
 }
 .form-box .form-control:focus {
   z-index: 2;
+  
 }
 .form-box input[type="email"] {
   margin-bottom: -1px;
